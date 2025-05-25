@@ -1,35 +1,39 @@
 <?php
 
-    if(!isset($_SESSION))
-    {
-        session_start();
-    }
-    switch ($_POST) {
-        
-        case isset($_POST[null]):
-            include_once 'View/login.php';
-            break;
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-            case isset($_POST['btnPrimeiroAcesso']):
-            echo "Primeiro Acesso";
-            include_once '../View/primeiroAcesso.php';
-            break;
+switch ($_POST) {
 
-            case isset($_POST['btnCadastrar']):
-                include_once 'UsuarioController.php';
-                print_r($_POST);
-                $uController = new UsuarioController();
-                $nome = $_POST['txtNome'];
-                $email = $_POST['txtEmail'];
-                $cpf = $_POST['txtCPF'];
-                $senha = $_POST['txtSenha'];
-                $uController->inserir($nome, $email, $cpf, $senha);
-                break;
-        
-        default:
-            
-                # code...
-                break;
+    case isset($_POST[null]):
+        include_once 'View/login.php';
+        break;
+
+    // Primeiro acesso
+    case isset($_POST['btnPrimeiroAcesso']):
+        include_once '../View/primeiroAcesso.php';
+        break;
+
+    case isset($_POST['btnCadastrar']):
+        include_once 'UsuarioController.php';
+
+        $uController = new UsuarioController();
+        $nome = $_POST['txtNome'];
+        $email = $_POST['txtEmail'];
+        $cpf = $_POST['txtCPF'];
+        $senha = $_POST['txtSenha'];
+
+        if ($uController->inserir($nome, $email, $cpf, $senha)) {
+            include_once '../View/cadastroRealizado.php';
+        } else {
+            include_once '../View/cadastroNaoRealizado.php';
         }
 
-        
+        break;
+
+    default:
+        echo "Este seria a proxima pagina";
+        # code...
+        break;
+}

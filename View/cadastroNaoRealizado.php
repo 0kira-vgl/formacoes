@@ -8,9 +8,7 @@
 </head>
 
 <body>
-    <form action="/Controller/Navegacao.php" method="post">
-        <input type="submit" name="sucesso" value="">
-    </form>
+    <h1>Cadastro Não Realizado com Sucesso</h1>
 </body>
 
 </html>

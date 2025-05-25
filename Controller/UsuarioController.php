@@ -5,9 +5,11 @@ if (!isset($_SESSION)) {
 }
 
 
-class UsuarioController {
+class UsuarioController
+{
 
-    function inserir($nome, $email, $cpf, $senha) {
+    function inserir($nome, $email, $cpf, $senha)
+    {
         require_once '../Model/Usuario.php';
         $usuario = new Usuario(
             $nome,
@@ -18,7 +20,7 @@ class UsuarioController {
 
         $r = $usuario->inserirBD();
         $_SESSION['usuario'] = serialize($usuario);
-        
+
         return $r;
     }
 }

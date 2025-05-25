@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  # Serviço PHP Apache
+  web:
+    build: .
+    container_name: formacoes_php
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=formacoes_user
+      - MYSQL_PASSWORD=formacoes_pass
+      - MYSQL_DATABASE=formacoes_db
+    networks:
+      - formacoes_network
+
+  # Serviço MySQL
+  db:
+    image: mysql:8.0
+    container_name: formacoes_mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: formacoes_db
+      MYSQL_USER: formacoes_user
+      MYSQL_PASSWORD: formacoes_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - formacoes_network
+
+  # Interface web para gerenciamento do MySQL (opcional)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: formacoes_phpmyadmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8081:80"
+    networks:
+      - formacoes_network
+
+networks:
+  formacoes_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
