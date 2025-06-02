@@ -124,6 +124,26 @@ switch ($_POST) {
         }
         break;
 
+    case isset($_POST["btnADM"]):
+        include_once '../View/ADMLogin.php';
+        break;
+    case isset($_POST["btnLoginADM"]):
+        require_once '../Controller/AdministradorController.php';
+        $aController = new AdministradorController();
+        if ($aController->login($_POST['txtLoginADM'], $_POST['txtSenhaADM'])) {
+            include_once '../View/ADMPrincipal.php';
+        }
+        break;
+    case isset($_POST["btnListarCadastrados"]):
+        include_once '../View/ADMListarCadastrados.php';
+        break;
+    case isset($_POST["btnListarAdministradores"]):
+        include_once '../View/ADMListarAdministradores.php';
+        break;
+    case isset($_POST["btnVoltar"]):
+        include_once '../View/ADMPrincipal.php';
+        break;
+
     default:
         include_once '../View/principal.php';
 

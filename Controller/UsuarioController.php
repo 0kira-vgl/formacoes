@@ -57,4 +57,13 @@ class UsuarioController
             return false;
         }
     }
+
+    public function gerarLista()
+    {
+        require_once '../Model/Usuario.php';
+        $con = Database::getInstance()->getConnection();
+        $sql = "SELECT idusuario, nome FROM usuario;";
+        $stmt = $con->query($sql);
+        return $stmt;
+    }
 }
