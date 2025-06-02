@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <form action="" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-marginw3-display-middle"
+    <form action="/Controller/Navegacao.php" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-marginw3-display-middle"
         style="width: 30%;">
         <h2 class="w3-center">Primeiro Acesso</h2>
         <div class="w3-row w3-section">
@@ -52,7 +52,7 @@
         </div>
         <div class="w3-row w3-section">
             <div class="w3-center" style="width:11%">
-                <button name="btnCadastrar" class="w3-button w3-block w3-margin w3-blue w3-cell w3-round-large"
+                <button type="submit" name="btnCadastrar" class="w3-button w3-block w3-margin w3-blue w3-cell w3-round-large"
                     style="width: 90%;">Cadastrar</button>
             </div>
         </div>

@@ -42,7 +42,7 @@ class OutrasFormacoes
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "INSERT INTO outrasformacoes (idusuario, inicio, fim, descricao)
                 VALUES (:idusuario, :inicio, :fim, :descricao)";
       $stmt = $conn->prepare($sql);
@@ -69,7 +69,7 @@ class OutrasFormacoes
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "DELETE FROM outrasformacoes WHERE idoutrasformacoes = :id";
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -86,7 +86,7 @@ class OutrasFormacoes
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "SELECT * FROM outrasformacoes WHERE idusuario = :idusuario";
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':idusuario', $idusuario, PDO::PARAM_INT);

@@ -53,7 +53,7 @@ class ExperienciaProfissional
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "INSERT INTO experienciaprofissional (idusuario, inicio, fim, empresa, descricao)
                 VALUES (:inicio, :fim, :empresa, :descricao)";
       $stmt = $conn->prepare($sql);
@@ -80,7 +80,7 @@ class ExperienciaProfissional
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "DELETE FROM experienciaprofissional WHERE id = :id";
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -97,7 +97,7 @@ class ExperienciaProfissional
     require_once 'ConexaoBD.php';
 
     try {
-      $conn = new Database()->getConnection();
+      $conn = new Database()::getInstance()->getConnection();
       $sql = "SELECT * FROM experienciaprofissional WHERE idusuario = :idusuario ORDER BY inicio DESC";
       $stmt = $conn->prepare($sql);
       $stmt->bindValue(':idusuario', $idusuario, PDO::PARAM_INT);

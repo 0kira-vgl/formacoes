@@ -10,15 +10,15 @@ class Usuario
         private string $nome,
         private string $email,
         private string $cpf,
-        private string $dataNascimento,
+        private ?string $dataNascimento,
         private string $senha,
     ) {
-        $this->id = $id;
+        $this->id = $id ?? null;
         $this->nome = $nome;
         $this->email = $email;
         $this->cpf = $cpf;
         $this->senha = $senha;
-        $this->dataNascimento = $dataNascimento;
+        $this->dataNascimento = $dataNascimento ?? null;
     }
 
     public function getID()
@@ -46,12 +46,34 @@ class Usuario
         return $this->senha;
     }
 
+    // Setters para atualização de dados
+    public function setID($id)
+    {
+        $this->id = $id;
+    }
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+    public function setCPF($cpf)
+    {
+        $this->cpf = $cpf;
+    }
+    public function setDataNascimento($dataNascimento)
+    {
+        $this->dataNascimento = $dataNascimento;
+    }
+
     public function inserirBD()
     {
-        require_once 'ConexaoBD.php';
+        require_once '../ConexaoBD.php';
 
         try {
-            $conn = new Database()->getConnection();
+            $conn = Database::getInstance()->getConnection();
             $sql = "INSERT INTO usuario (nome, email, cpf, dataNascimento, senha)
                 VALUES (:nome, :email, :cpf, :dataNascimento, :senha)";
             $stmt = $conn->prepare($sql);
@@ -79,7 +101,7 @@ class Usuario
         require_once 'ConexaoBD.php';
 
         try {
-            $conn = new Database()->getConnection();
+            $conn = Database::getInstance()->getConnection();
             $sql = "SELECT * FROM usuario WHERE cpf = :cpf";
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':cpf', $cpf);
@@ -109,7 +131,7 @@ class Usuario
         require_once 'ConexaoBD.php';
 
         try {
-            $conn = new Database()->getConnection();
+            $conn = Database::getInstance()->getConnection();
             $sql = "UPDATE usuario SET nome = :nome, email = :email, cpf = :cpf, dataNascimento = :dataNascimento, senha = :senha
                     WHERE idusuario = :id";
 
